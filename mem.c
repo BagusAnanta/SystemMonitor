@@ -52,10 +52,17 @@ MEMusage memStat(){
 
     fclose(file);
 
+    // check swap is available ?
+    if (totalSwap != 0 && freeSwap != 0){
+        swapUsage = totalSwap - freeSwap;
+        swapUsagePercent = (swapUsage / freeSwap) * 100.0;
+    } else {
+       swapUsage = 0.0;
+       swapUsagePercent = 0.0;
+    }
+
     memUsage = memTotal - memAvailable;
-    swapUsage = totalSwap - freeSwap;
     memUsagePercent = (memUsage / memTotal) * 100.0;
-    swapUsagePercent = (swapUsage / freeSwap) * 100.0;
     
 
     data.memTotal = memTotal;
